@@ -1,11 +1,11 @@
 import { test as base, expect } from '@playwright/test';
-import { CartPage } from '../tests/pages/CartPage';
-import { CheckoutCompletePage } from '../tests/pages/CheckoutCompletePage';
-import { CheckoutInformationPage } from '../tests/pages/CheckoutInformationPage';
-import { CheckoutOverviewPage } from '../tests/pages/CheckoutOverviewPage';
-import { InventoryPage } from '../tests/pages/InventoryPage';
-import { LoginPage } from '../tests/pages/LoginPage';
-import { ProductDetailsPage } from '../tests/pages/ProductDetailsPage';
+import { CartPage } from '../pages/CartPage';
+import { CheckoutCompletePage } from '../pages/CheckoutCompletePage';
+import { CheckoutInformationPage } from '../pages/CheckoutInformationPage';
+import { CheckoutOverviewPage } from '../pages/CheckoutOverviewPage';
+import { InventoryPage } from '../pages/InventoryPage';
+import { LoginPage } from '../pages/LoginPage';
+import { ProductDetailsPage } from '../pages/ProductDetailsPage';
 
 interface PageFixtures {
   loginPage: LoginPage;
