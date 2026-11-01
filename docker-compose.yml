@@ -1,0 +1,25 @@
+services:
+  playwright-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: playwrightmcps
+    container_name: playwrightmcp-tests
+    working_dir: /app
+    environment:
+      CI: "1"
+    volumes:
+      # Mount the project root so code changes are reflected without rebuilds.
+      - .:/app
+      # Preserve the container's node_modules.
+      - /app/node_modules
+      # Persist reports and test artifacts on the host.
+      - ./reports:/app/reports
+      - ./allure-results:/app/allure-results
+      - ./allure-report:/app/allure-report
+      - ./custom-report:/app/custom-report
+      - ./test-results:/app/test-results
+    # Default suite; override with: docker compose run --rm playwright-tests api
+    command: ["all"]
+    stdin_open: true
+    tty: true

@@ -1,4 +1,4 @@
-import { test, expect } from './fixtures/customFixtures';
+import { test, expect } from '../fixtures/customFixtures';
 
 test.describe('Core Shopping Journey', () => {
   test('Review and manage cart contents', async ({ loginPage, inventoryPage, cartPage }) => {

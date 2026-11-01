@@ -1,7 +1,7 @@
-import { test, expect } from './fixtures/customFixtures';
+import { test, expect } from '../fixtures/customFixtures';
 
 test.describe('Core Shopping Journey', () => {
-  test('Sign in with valid and invalid credentials', async ({ page, loginPage, inventoryPage }) => {
+  test('Sign in with valid and invalid credentials @sanity', async ({ page, loginPage, inventoryPage }) => {
     // 1. Start from a fresh session at https://www.saucedemo.com/. Submit an incorrect username and password.
     await loginPage.goto();
     await loginPage.loginWithCredentials('invalid_user', 'incorrect_password');
