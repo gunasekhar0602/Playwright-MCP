@@ -1,7 +1,7 @@
 import { test, expect } from '../fixtures/customFixtures';
 
 test.describe('Core Shopping Journey', () => {
-  test('Review and manage cart contents', async ({ loginPage, inventoryPage, cartPage }) => {
+  test('Review and manage cart contents',{tag:'@smoke'},async ({ loginPage, inventoryPage, cartPage }) => {
     // 1. From a fresh session, sign in as standard_user and add Sauce Labs Backpack and Sauce Labs Bike Light to the cart.
     await loginPage.goto();
     await loginPage.loginWithCredentials('standard_user', 'secret_sauce');

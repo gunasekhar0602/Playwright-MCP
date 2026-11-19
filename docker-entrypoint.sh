@@ -3,18 +3,18 @@
 set -eu
 
 usage() {
-  cat <<'EOF'
-Usage: docker-entrypoint.sh {all|sanity|regression|web|e2e|datadriven|help} [playwright-args...]
-
-Available test suites:
-  all         - Run all tests (default)
-  sanity      - Run the login smoke test
-  regression  - Run the core shopping journey tests
-  web         - Run browser tests
-  e2e         - Run end-to-end tests
-  datadriven  - Run the data/seed test
-  help        - Show this help message
-EOF
+  printf '%s\n' \
+    'Usage: docker-entrypoint.sh {all|sanity|regression|web|e2e|datadriven|smoke|help} [playwright-args...]' \
+    '' \
+    'Available test suites:' \
+    '  all         - Run all tests (default)' \
+    '  sanity      - Run the login smoke test' \
+    '  regression  - Run the core shopping journey tests' \
+    '  web         - Run browser tests' \
+    '  e2e         - Run end-to-end tests' \
+    '  datadriven  - Run the data/seed test' \
+    '  smoke       - Run tests tagged @smoke' \
+    '  help        - Show this help message'
 }
 
 SUITE="${1:-all}"
@@ -44,6 +44,11 @@ case "$SUITE" in
     shift
     echo "==> Running data-driven tests (args: $*)"
     exec npx playwright test tests/seed.spec.ts "$@"
+    ;;
+  smoke)
+    shift
+    echo "==> Running smoke tests (args: $*)"
+    exec npx playwright test --grep @smoke "$@"
     ;;
   help|-h|--help)
     usage
