@@ -19,3 +19,6 @@ test.describe('Core Shopping Journey', () => {
 
 
 // .\setup-docker-hook.ps1
+
+
+console.log("Apple")
