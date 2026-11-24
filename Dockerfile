@@ -31,3 +31,6 @@ ENTRYPOINT ["sh", "/app/docker-entrypoint.sh"]
 
 # Default: run all tests
 CMD ["all"]
+
+
+

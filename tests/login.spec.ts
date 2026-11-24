@@ -16,3 +16,6 @@ test.describe('Core Shopping Journey', () => {
     await expect(inventoryPage.cartButton).toBeVisible();
   });
 });
+
+
+// .\setup-docker-hook.ps1
