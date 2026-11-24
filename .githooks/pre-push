@@ -1,0 +1,20 @@
+#!/bin/sh
+set -eu
+
+image="playwright-mcp:pre-push"
+
+if ! command -v docker >/dev/null 2>&1; then
+  echo "Docker was not found. Start or install Docker Desktop before pushing." >&2
+  exit 1
+fi
+
+if ! docker info >/dev/null 2>&1; then
+  echo "Docker is unavailable. Start Docker Desktop and make sure its engine is running." >&2
+  exit 1
+fi
+
+echo "Building $image with the local Docker engine..."
+docker build --tag "$image" .
+
+echo "Running Playwright tests in the local Docker container..."
+docker run --rm "$image" all
