@@ -1,10 +1,9 @@
 import { test, expect } from '../fixtures/customFixtures';
 
 test.describe('Core Shopping Journey', () => {
-  test('Review and manage cart contents',{tag:'@smoke'},async ({ loginPage, inventoryPage, cartPage }) => {
-    // 1. From a fresh session, sign in as standard_user and add Sauce Labs Backpack and Sauce Labs Bike Light to the cart.
-    await loginPage.goto();
-    await loginPage.loginWithCredentials('standard_user', 'secret_sauce');
+  test('Review and manage cart contents',{tag:'@smoke'},async ({ authenticatedPage, inventoryPage, cartPage }) => {
+    // 1. Start with a seeded standard_user session and add Sauce Labs Backpack and Sauce Labs Bike Light to the cart.
+    await expect(authenticatedPage).toHaveURL(/\/inventory\.html$/);
     await inventoryPage.addProductToCart('Sauce Labs Backpack');
     await inventoryPage.addProductToCart('Sauce Labs Bike Light');
     await expect(inventoryPage.cartButton).toHaveAccessibleName('Cart, 2 items');

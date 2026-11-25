@@ -1,10 +1,9 @@
 import { test, expect } from '../fixtures/customFixtures';
 
 test.describe('Core Shopping Journey', () => {
-  test('Validate checkout information', async ({ loginPage, inventoryPage, cartPage, checkoutInformationPage, page }) => {
-    // 1. From a fresh session, sign in as standard_user, add one product, open the cart, and select Checkout.
-    await loginPage.goto();
-    await loginPage.loginWithCredentials('standard_user', 'secret_sauce');
+  test('Validate checkout information', async ({ authenticatedPage: page, inventoryPage, cartPage, checkoutInformationPage }) => {
+    // 1. Start with a seeded standard_user session, add one product, open the cart, and select Checkout.
+    await expect(page).toHaveURL(/\/inventory\.html$/);
     await inventoryPage.addProductToCart('Sauce Labs Backpack');
     await inventoryPage.openCart();
     await cartPage.checkout();

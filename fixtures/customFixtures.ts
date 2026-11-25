@@ -1,4 +1,4 @@
-import { test as base, expect } from '@playwright/test';
+import { test as base, expect, type Page } from '@playwright/test';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutCompletePage } from '../pages/CheckoutCompletePage';
 import { CheckoutInformationPage } from '../pages/CheckoutInformationPage';
@@ -8,6 +8,7 @@ import { LoginPage } from '../pages/LoginPage';
 import { ProductDetailsPage } from '../pages/ProductDetailsPage';
 
 interface PageFixtures {
+  authenticatedPage: Page;
   loginPage: LoginPage;
   inventoryPage: InventoryPage;
   productDetailsPage: ProductDetailsPage;
@@ -18,6 +19,13 @@ interface PageFixtures {
 }
 
 export const test = base.extend<PageFixtures>({
+  authenticatedPage: async ({ page }, use) => {
+    await page.context().addCookies([
+      { name: 'session-username', value: 'standard_user', url: 'https://www.saucedemo.com' },
+    ]);
+    await page.goto('https://www.saucedemo.com/inventory.html');
+    await use(page);
+  },
   loginPage: async ({ page }, use) => use(new LoginPage(page)),
   inventoryPage: async ({ page }, use) => use(new InventoryPage(page)),
   productDetailsPage: async ({ page }, use) => use(new ProductDetailsPage(page)),

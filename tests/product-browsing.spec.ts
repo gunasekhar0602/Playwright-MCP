@@ -1,10 +1,9 @@
 import { test, expect } from '../fixtures/customFixtures';
 
 test.describe('Core Shopping Journey', () => {
-  test('Browse, sort, inspect, and add a product', async ({ loginPage, inventoryPage, productDetailsPage }) => {
-    // 1. From a fresh session, sign in as standard_user with password secret_sauce.
-    await loginPage.goto();
-    await loginPage.loginWithCredentials('standard_user', 'secret_sauce');
+  test('Browse, sort, inspect, and add a product', async ({ authenticatedPage, inventoryPage, productDetailsPage }) => {
+    // 1. Start with a seeded standard_user session.
+    await expect(authenticatedPage).toHaveURL(/\/inventory\.html$/);
     await expect(inventoryPage.productsHeading).toBeVisible();
     await expect(inventoryPage.addToCartButtons).toHaveCount(6);
     await expect(inventoryPage.sortControl).toBeVisible();
